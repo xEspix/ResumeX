@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Description - {{ job['Job Title'] }}</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* Sidebar Styling */
+        html {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        html::-webkit-scrollbar {
+            display: none; 
+        }
+        
+        .sidebar {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            background-image: linear-gradient(90deg, #4b6cb7, #182848);
+            color: #fff;
+            padding-top: 30px;
+            text-align: left;
+        }
+
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 16px;
+            color: #c1c1c1;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #fff;
+            background-color: #2D3748;
+        }
+
+
+        /* Job Description Styling */
+        .job-details-header {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .job-details-subheader {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-description {
+            margin-bottom: 2rem;
+        }
+        .apply-btn {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 5%;
+            width: 20px;
+        }
+
+        .apply-btn:hover {
+            background-color: #1f2937;
+            transform: translateY(-5px);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Fixed Sidebar -->
+    <div class="sidebar">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('uploadForm' )}}">Upload Resume</a>
+        <a href="{{ url_for('ats_score') }}">ATS Score</a>
+        <a href="{{ url_for('jrs') }}">Job Recommendation System</a>
+        <a href="#">Interview Tips</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="ml-1/5 p-6 pl-[20%]">
+        <!-- Job Details Header -->
+        <div class="max-w-4xl mx-auto p-8 bg-white rounded-lg shadow-md mt-10">
+            <h1 class="text-3xl font-bold mb-6">{{ job['Job Title'] }} - {{ job['Organisation Name'] }}</h1>
+            <div class="flex items-center mb-4">
+                <p class="text-gray-700 mr-4"><i class="fas fa-calendar-alt mr-2"></i>{{ job['Created'][:10] }}</p>
+                <p class="text-gray-700 flex items-center"><i class="fas fa-tags mr-2"></i>{{ job['Category'] }}</p>
+            </div>
+            <p class="text-gray-600 mb-6"><i class="fas fa-map-marker-alt mr-2"></i>{{ job['Location'] }}</p>
+            
+            <h3 class="text-xl font-semibold mb-4">Job Description</h3>
+            <p class="text-gray-700">{{ job['Description'] }}</p>
+    
+            <br>
+            <br>
+            <div class="text-center">
+                <a href="{{ job['URL to Apply'] }}" class="apply-btn bg-gray-400 text-white py-2 px-4 rounded hover:bg-gray-900">Apply Now</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
