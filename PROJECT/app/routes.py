@@ -104,8 +104,8 @@ def uploadForm():
     return render_template('resume.html', form=form)
 
 
-@login_required
 @app.route('/dashboard')
+@login_required
 def dashboard():
     with app.app_context():
         resume_data=Resume.query.filter_by(username=current_user.username).order_by(Resume.id.desc()).first()
@@ -152,6 +152,11 @@ def job_details(job_id):
         
     return render_template('job_details.html', job=job_found)
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home'))
 
 
 
